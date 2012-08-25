@@ -41,7 +41,7 @@ main content changed from page to page, certain sections like <em>header</em> an
 had to remain the same on all pages. So these sections were necessarily copy-pasted
 in all pages. It all worked fine except when you have to make any change to the <em>header</em>
 or <em>footer</em>. That would require making changes in all html pages... a major
-maintanence hazard.</p>
+maintenance hazard.</p>
 
 <p>Then came server side technologies like CGI, ASP, PHP, JSP which had the ability
 to include a file contents into another file. This basically solved the
@@ -51,10 +51,10 @@ language of choice, you will need to find a web host which supports your preferr
 server side tech.</p>
 
 <p>Finding a host isn't really an issue. But what if we could create a site without
-any Server Side technology and also without the maintanence hazard of the old days.
+any Server Side technology and also without the maintenance hazard of the old days.
 A curious mind would ask <em>WHY???</em>. Well, because we can!</p>
 
-<p>The idea is a store all articles in seperate files, but without the site's
+<p>The idea is to store all articles in separate files, but without the site's
 repeating elements like header and footer. Each article file would contain some
 meta-data at the start, followed by the content. An example of the file would be:</p>
 
@@ -65,7 +65,7 @@ title: hello world
 </code></pre>
 
 <p>All such articles are stored in <strong>articles</strong> folder. We also have a <strong>layout.html</strong>
-file which contains the basic tempalte of the site. Something like this:</p>
+file which contains the basic template of the site. Something like this:</p>
 
 <pre><code>&lt;html&gt;
     &lt;head&gt;&lt;title&gt;{{title}}&lt;/title&gt;&lt;/head&gt;
@@ -78,27 +78,33 @@ and combine it with <strong>layout.html</strong> to generate static html files. 
 html files can then be uploaded to any web host(<strong>Github</strong> in my case) and the
 site will be running without any server side processing.</p>
 
-<p>Before we move forward, I would like to point out that such tools already exists:
-* DocPad
-* Jekyll
-But I wanted something custom made, simple &amp; sweet; which would help me maintain
+<p>Before we move forward, I would like to point out that such tools already exists:</p>
+
+<ul>
+<li>DocPad</li>
+<li>Jekyll</li>
+</ul>
+
+<p>But I wanted something custom made, simple &amp; sweet; which would help me maintain
 my blog. And thats what <strong>Stasig</strong> is!</p>
 
-<p>Ofcourse, a blog feels incomplete without <em>Comments</em> section. This is where I got
+<p>Of course, a blog feels incomplete without <em>Comments</em> section. This is where I got
 initially stuck up. Without a database, where am I going to store the comments?
 Looking over the Internet, found <a href="http://disqus.com/">Disqus</a>. Just go to their
 site, register an account, copy paste a piece of JS on your website. And you have
 a full featured comment system embedded... really MAGIC! They automatically
 create comment threads based on the URL of your site. The funny thing is, I had
 always seen <em>Disqus</em> on many other blogs, most notably, jQuery. But it never
-really hit me that it is a comment handling service. Ofcourse, the downside is,
+really hit me that it is a comment handling service. Of course, the downside is,
 the comments are on <em>their</em> system and not yours. But you get free spam-blocking
 and oAuth logins, so its fair enough.</p>
 
 <p>If you are reading this, it means my blog is online again, created with
 HTML/CSS &amp; Javascript <em>only</em>. The source code of Stasig has been hosted on
-<a href="https://github.com/niloy/stasig">Github</a>. Feel free to check it out and
-leave your comments.</p>
+<a href="https://github.com/niloy/stasig">Github</a>. The raw files of my blog have also
+been hosted <a href="https://github.com/niloy/blog">here</a>. Of course, hosting your blog
+files on Github gives you free version control, something that CMS like Wordpress
+would never be able to match ;). Feel free to check them out and leave your comments.</p>
 				</div>
 		        <!-- Disqus code start -->
                 <div id="disqus_thread"></div>
