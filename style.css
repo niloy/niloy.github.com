@@ -16,7 +16,7 @@ Released   : 20120719
 
 a {
 	text-decoration: underline;
-	color: #5B874B;
+	color: #4279D6;
 }
 
 a:hover {
@@ -81,6 +81,8 @@ img.aligntop {
 }
 
 p {
+    font-size: 1.1em;
+    font-family: 'Abel';
 	margin-bottom: 1.75em;
 }
 
@@ -142,9 +144,9 @@ ul.list li.first {
 	position: relative;
 	padding: 40px;
 	height: 70px;
-	background: #73B05E;
+	background: #5E8FB0;
 	color: #FFF;
-	box-shadow: inset 0px -10px 50px 0px #53903E;
+	box-shadow: inset 0px -10px 50px 0px #3E6290;
 	overflow: hidden;
 	border-radius: 6px 6px 0 0;
 }

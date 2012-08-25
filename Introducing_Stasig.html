@@ -56,27 +56,33 @@ A curious mind would ask <em>WHY???</em>. Well, because we can!</p>
 
 <p>The idea is a store all articles in seperate files, but without the site's
 repeating elements like header and footer. Each article file would contain some
-meta-data at the start, followed by the content. An example of the file would be
-    <!--
-    title: hello world
-    -->
-    <h1>Hello World</h1>
-All such articles are stored in <strong>articles</strong> folder. We also have a <strong>layout.html</strong>
-file which contains the basic tempalte of the site. Something like this:
-    <html>
-        <head><title>{{title}}</title></head>
-        <body>{{content}}</body>
-    </html>
-Now, a preprocessor program will iterate over all files in the <strong>articles</strong> folder
+meta-data at the start, followed by the content. An example of the file would be:</p>
+
+<pre><code>&lt;!--
+title: hello world
+--&gt;
+&lt;h1&gt;Hello World&lt;/h1&gt;
+</code></pre>
+
+<p>All such articles are stored in <strong>articles</strong> folder. We also have a <strong>layout.html</strong>
+file which contains the basic tempalte of the site. Something like this:</p>
+
+<pre><code>&lt;html&gt;
+    &lt;head&gt;&lt;title&gt;{{title}}&lt;/title&gt;&lt;/head&gt;
+    &lt;body&gt;{{content}}&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>Now, a preprocessor program will iterate over all files in the <strong>articles</strong> folder
 and combine it with <strong>layout.html</strong> to generate static html files. The generated
-html files can then be uploaded to any web host and the site will be running
-without any server side processing.</p>
+html files can then be uploaded to any web host(<strong>Github</strong> in my case) and the
+site will be running without any server side processing.</p>
 
 <p>Before we move forward, I would like to point out that such tools already exists:
 * DocPad
 * Jekyll
 But I wanted something custom made, simple &amp; sweet; which would help me maintain
-my blog. And thats what <strong>stasig</strong> is!</p>
+my blog. And thats what <strong>Stasig</strong> is!</p>
 
 <p>Ofcourse, a blog feels incomplete without <em>Comments</em> section. This is where I got
 initially stuck up. Without a database, where am I going to store the comments?
@@ -94,12 +100,28 @@ HTML/CSS &amp; Javascript <em>only</em>. The source code of Stasig has been host
 <a href="https://github.com/niloy/stasig">Github</a>. Feel free to check it out and
 leave your comments.</p>
 				</div>
+		        <!-- Disqus code start -->
+                <div id="disqus_thread"></div>
+                <script type="text/javascript">
+                    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+                    var disqus_shortname = 'niloygithub'; // required: replace example with your forum shortname
+
+                    /* * * DON'T EDIT BELOW THIS LINE * * */
+                    (function() {
+                        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                    })();
+                </script>
+                <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+                <!-- Disqus code end -->
 		    </div>
 		    <br class="clearfix" />
 		</div>
     </div>
     <div id="footer">
-		&copy; Copyrighted now and beyond.
+		&copy; Copyrighted now and forever.
 	</div>
     </div>
 </body>
