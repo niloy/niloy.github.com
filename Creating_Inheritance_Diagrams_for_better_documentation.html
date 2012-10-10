@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Creating Inheritance Diagrams for better documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link href="http://fonts.googleapis.com/css?family=Abel" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div id="outer">
+    <div id="wrapper">
+        <div id="header">
+			<div id="logo">
+				<h1><a href="index.html">Nulloy!</a></h1>
+			</div>
+		</div>
+		<div id="page">
+		    <div id="sidebar">
+			    <div class="box">
+				    <h3>Articles</h3>
+				    <section class='articleList'>
+<ul>
+	<li><a href='Creating_Inheritance_Diagrams_for_better_documentation.html'>Creating Inheritance Diagrams for better documentation</a></li>
+	<li><a href='Introducing_Stasig.html'>Introducing Stasig</a></li>
+</ul>
+</section>
+
+			    </div>
+		    </div>
+		    <div id="content">
+		        <div class="box">
+					<!--
+title: Creating Inheritance Diagrams for better documentation
+-->
+
+<h1>Creating Inheritance Diagrams for better documentation</h1>
+
+<p>A typical large scale software is often broken using classes. These classes
+follow complex inheritance patterns. Understanding the inheritance of classes
+gives a better understanding of the software. So in this post today, we will
+explore how to automatically create <em>Inheritance diagrams</em> from the code
+directly.</p>
+
+<p>For the demonstration, lets pick <a href="https://github.com/mrdoob/three.js/">THREE.js</a>
+which is a popular JavaScript library for creating 3D graphics in the browser.
+Every piece of functionality in the library has been neatly wrapped in classes.</p>
+
+<p>The first thing we need to do is download the source code. THREE.js already
+provides production ready code <a href="https://raw.github.com/mrdoob/three.js/master/build/three.min.js">here</a>.
+This single file contains all the classes in the project. This is especially
+helpful because we don’t need to iterate over multiple folders to look for
+class definitions.</p>
+
+<p>In THREE.js, all inheritance is done using <code>Object.create</code>. For example,</p>
+
+<pre><code>THREE.Camera.prototype=Object.create(THREE.Object3D.prototype)
+</code></pre>
+
+<p>This means, the class <strong>Camera</strong> inherits from <strong>Object3D</strong>. We can use <strong>grep</strong>
+and find out all such statements.</p>
+
+<pre><code>grep -o "THREE\.[^.]*\.prototype=Object\.create([^)]*)" three.min.js
+</code></pre>
+
+<p>The <code>-o</code> tells grep to only display matching portion instead of full line.
+Executing the command above generates output like this:</p>
+
+<pre><code>THREE.Camera.prototype=Object.create(THREE.Object3D.prototype)
+THREE.OrthographicCamera.prototype=Object.create(THREE.Camera.prototype)
+THREE.PerspectiveCamera.prototype=Object.create(THREE.Camera.prototype)
+THREE.Light.prototype=Object.create(THREE.Object3D.prototype)
+THREE.AmbientLight.prototype=Object.create(THREE.Light.prototype)
+THREE.DirectionalLight.prototype=Object.create(THREE.Light.prototype)
+THREE.HemisphereLight.prototype=Object.create(THREE.Light.prototype)
+THREE.PointLight.prototype=Object.create(THREE.Light.prototype)
+THREE.SpotLight.prototype=Object.create(THREE.Light.prototype)
+THREE.BinaryLoader.prototype=Object.create(THREE.Loader.prototype)
+THREE.JSONLoader.prototype=Object.create(THREE.Loader.prototype)
+...
+</code></pre>
+
+<p>We can pipe this output to the following <strong>sed</strong> command:</p>
+
+<pre><code>sed 's/THREE\.\([^.]*\)\.prototype=Object\.create(THREE\.\([^.]*\)\.prototype)/\t\2 -&gt; \1/'
+</code></pre>
+
+<p>Which will generate the following output:</p>
+
+<pre><code>Object3D -&gt; Camera
+Camera -&gt; OrthographicCamera
+Camera -&gt; PerspectiveCamera
+Object3D -&gt; Light
+Light -&gt; AmbientLight
+Light -&gt; DirectionalLight
+Light -&gt; HemisphereLight
+Light -&gt; PointLight
+Light -&gt; SpotLight
+Loader -&gt; BinaryLoader
+Loader -&gt; JSONLoader
+...
+</code></pre>
+
+<p>We need to generate this particular format because this is understood by the
+<a href="http://www.graphviz.org/">graphviz</a> library. <strong>graphviz</strong> is a Graph Visualization
+Software that can create graph/tree images from input text files. On Ubuntu,
+installing it is as simple as:</p>
+
+<pre><code>sudo apt-get install graphviz
+</code></pre>
+
+<blockquote>
+  <p>Note: <code>dot</code> is the actual name of the executable that generates the graph. But,
+  it comes under the <em>graphviz</em> package.</p>
+</blockquote>
+
+<p>The final input to <code>dot</code> should be this:</p>
+
+<pre><code>digraph tree {
+    Object3D -&gt; Camera
+    Camera -&gt; OrthographicCamera
+    Camera -&gt; PerspectiveCamera
+    Object3D -&gt; Light
+    Light -&gt; AmbientLight
+    Light -&gt; DirectionalLight
+    Light -&gt; HemisphereLight
+    Light -&gt; PointLight
+    Light -&gt; SpotLight
+    Loader -&gt; BinaryLoader
+    Loader -&gt; JSONLoader
+}
+</code></pre>
+
+<p>The code above is also known as the <a href="http://en.wikipedia.org/wiki/DOT_language">DOT language</a>.</p>
+
+<p>Assuming the dot commands is stored in a file called <code>tree.gv</code>, execute the
+following command:</p>
+
+<pre><code>dot -Tsvg -othree.tree.svg tree.gv
+</code></pre>
+
+<p>This command will generate the tree output in SVG format in the file
+<a href="three.tree.svg">three.tree.svg</a>.</p>
+
+<p>Putting it all together in a shell script:</p>
+
+<pre><code>echo "digraph tree {" &gt; /tmp/tree.gv
+grep -o "THREE\.[^.]*\.prototype=Object\.create([^)]*)" three.min.js|\
+sed 's/THREE\.\([^.]*\)\.prototype=Object\.create(THREE\.\([^.]*\)\.prototype)/\t\2 -&gt; \1/'\
+&gt;&gt;/tmp/tree.gv
+echo "}" &gt;&gt; /tmp/tree.gv
+dot -Tsvg -othree.tree.svg /tmp/tree.gv
+</code></pre>
+
+<p>And you are done. Ofcourse, this idea is not limited to inheritance diagrams. One
+can plot a graph of various function calls being made by a certain class. Or
+the entire site diagram where each node is a page and each edge represents a
+hyperlink. The possibilities are really endless!</p>
+				</div>
+		        <!-- Disqus code start -->
+                <div id="disqus_thread"></div>
+                <script type="text/javascript">
+                    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+                    var disqus_shortname = 'niloygithub'; // required: replace example with your forum shortname
+
+                    /* * * DON'T EDIT BELOW THIS LINE * * */
+                    if (window.location.host !== "localhost") {
+                        (function() {
+                            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                        })();
+                    }
+                </script>
+                <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+                <!-- Disqus code end -->
+		    </div>
+		    <br class="clearfix" />
+		</div>
+    </div>
+    <div id="footer">
+		&copy; Copyrighted now and forever.
+	</div>
+    </div>
+</body>
+</html>

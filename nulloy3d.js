@@ -16,7 +16,6 @@ window.onload = function() {
 
 	});
 	var textMaterial = new THREE.MeshLambertMaterial({
-//	    color: Math.random() * 0xffffff,
         color: 0xffffff,
 //	    overdraw: true
     });

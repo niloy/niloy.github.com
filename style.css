@@ -259,3 +259,11 @@ ul.list li.first {
 	position: relative;
 	margin: 0 auto;
 }
+
+pre {
+    margin: 10px 0;
+    padding-left: 10px;
+    overflow: auto;
+    border: 1px solid #CFCFCF;
+    border-radius: 5px;
+}
