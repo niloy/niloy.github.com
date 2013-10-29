@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta charset="utf-8" />
+      <title>Neo Application</title>
+      <script>
+        var Neo = {};
+        Neo.Classes = {};
+        Neo.ENV = "web";
+        Neo.appStart = function() {
+          Neo.App = new Neo.Classes.Application();
+        };
+      </script>
+      
+  <link rel="stylesheet" href="files/common.min.css" />
+  <link rel="stylesheet" href="files/tabTest.min.css" />
+  <script src="files/common.min.js"></script>
+  <script src="files/tabTest.min.js"></script>
+  <script>
+    Neo.CURRENT_VIEW_NAME = "tabTest";
+    window.onload = Neo.appStart;
+  </script>
+  
+  </head>
+  <body>
+  </body>
+</html>
+<!-- Created on Tue Oct 29 2013 20:21:32 GMT+0530 (India Standard Time) -->
