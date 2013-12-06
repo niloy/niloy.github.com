@@ -1,4 +1,4 @@
-/* Created on Wed Oct 30 2013 00:09:44 GMT+0530 (India Standard Time) */
+/* Created on Fri Dec 06 2013 15:48:19 GMT+0530 (IST) */
 /*! normalize.css v2.1.2 | MIT License | git.io/normalize */
 
 /* ==========================================================================
@@ -409,6 +409,15 @@ table {
 section {
   position: relative;
   display: inline-block;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  vertical-align: top;
+}
+
+div {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  vertical-align: top;
 }
 
 .neoNotification {
