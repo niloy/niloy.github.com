@@ -68,7 +68,6 @@ html, body {
 }
 
 #cloud2 {
-	-webkit-transform: rotate(180deg) scale(0.7);
 	transform: rotate(180deg) scale(0.7);
 	background-image: url(cloud.png);
 	width: 266px;
@@ -83,9 +82,7 @@ html, body {
 	width: 266px;
 	height: 149px;
 	position: absolute;
-	-webkit-animation: floating 60s infinite linear;
 	animation: floating 60s infinite linear;
-	-webkit-transform: scale(0.8);
 	transform: scale(0.8);
 }
 
@@ -94,9 +91,7 @@ html, body {
 	width: 266px;
 	height: 149px;
 	position: absolute;
-	-webkit-animation: floating 180s infinite linear;
 	animation: floating 180s infinite linear;
-	-webkit-transform: scale(0.5) rotate(170deg);
 	transform: scale(0.5) rotate(170deg);
 }
 
@@ -227,33 +222,8 @@ html, body {
 	width: 266px;
 	height: 149px;
 	position: absolute;
-	-webkit-transform: scale(0.1) rotate(170deg);
 	transform: scale(0.1) rotate(170deg);
-	-webkit-animation: blowing 3s infinite linear;
 	animation: blowing 3s infinite linear;
-}
-
-@-webkit-keyframes blowing {
-	0% {
-		bottom: 143px;
-		right: 206px;
-		opacity: 0;
-	}
-
-	10% {
-		opacity: 1;
-		right: 206px;
-	}
-
-	90% {
-		opacity: 0;
-	}
-
-	100% {
-		bottom: 193px;
-		opacity: 0;
-		right: 212px;
-	}
 }
 
 @keyframes blowing {
@@ -285,28 +255,7 @@ html, body {
 	background-color: white;
 	position: fixed;
 	left: 10%;
-	-webkit-animation: shimmering1 5s infinite linear;
 	animation: shimmering1 5s infinite linear;
-}
-
-@-webkit-keyframes shimmering1 {
-	0% {
-		bottom: 20px;
-		opacity: 0;
-	}
-
-	30% {
-		opacity: 1;
-	}
-
-	70% {
-		opacity: 0;
-	}
-
-	100% {
-		bottom: 16px;
-		opacity: 0;
-	}
 }
 
 @keyframes shimmering1 {
@@ -335,29 +284,7 @@ html, body {
 	background-color: white;
 	position: fixed;
 	left: 11%;
-	-webkit-animation: shimmering2 5s infinite;
 	animation: shimmering2 5s infinite;
-}
-
-@-webkit-keyframes shimmering2 {
-	0% {
-		bottom: 15px;
-		opacity: 0;
-	}
-
-	50% {
-		bottom: 15px;
-		opacity: 0;
-	}
-
-	80% {
-		opacity: 1;
-	}
-
-	100% {
-		bottom: 10px;
-		opacity: 0;
-	}
 }
 
 @keyframes shimmering2 {
