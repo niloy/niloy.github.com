@@ -6,18 +6,56 @@
 
 html, body {
 	height: 100%;
-	background-image: linear-gradient(to bottom, #4E79AE, #9CB8D3);
 	overflow: hidden;
+}
+
+.affected-by-light {
+	background-image: linear-gradient(to bottom, #4E79AE, #9CB8D3);
+	animation: daylight-brightness 180s infinite cubic-bezier(.55,.06,.68,.19);
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+@keyframes daylight-brightness {
+	0% {
+		filter: brightness(1.0);
+	}
+
+	50% {
+		filter: brightness(0.3);
+	}
+
+	100% {
+		filter: brightness(1.0)
+	}
 }
 
 #sun {
 	background-image: radial-gradient(#FEF407, #D1A401);
 	width: 120px;
 	height: 120px;
-	position: fixed;
+	position: absolute;
 	left: 150px;
 	top: 70px;
 	border-radius: 60px;
+	animation: setting-down 180s infinite linear;
+}
+
+@keyframes setting-down {
+	0% {
+		top: -100px;
+		filter: hue-rotate(0);
+	}
+
+	50% {
+		top: calc(100% + 120px);
+		filter: hue-rotate(-45deg);
+	}
+
+	100% {
+		top: calc(100% + 120px);
+	}
 }
 
 #cloud1 {
@@ -67,19 +105,16 @@ html, body {
 	width: 277px;
 	height: 171px;
 	position: absolute;
-	animation: floating 40s infinite linear;
+	animation: floating 40s infinite linear, daylight-brightness 180s infinite cubic-bezier(.55,.06,.68,.19),
+		change-skin-color 180s infinite cubic-bezier(.55,.06,.68,.19);
 	transform: scale(2);
 	top: 100px;
 }
 
-@-webkit-keyframes floating {
-	from {
-		left: 100%;
-	}
-
-	to {
-		left: -500px;
-	}
+@keyframes change-skin-color {
+	0% {filter: hue-rotate(0deg)}
+	50% {filter: hue-rotate(140deg)}
+	100% {filter: hue-rotate(-1deg)}
 }
 
 @keyframes floating {
