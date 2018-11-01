@@ -62,6 +62,16 @@ html, body {
 	transform: scale(0.5) rotate(170deg);
 }
 
+#dragon {
+	background: url(dragon.gif);
+	width: 277px;
+	height: 171px;
+	position: absolute;
+	animation: floating 40s infinite linear;
+	transform: scale(2);
+	top: 100px;
+}
+
 @-webkit-keyframes floating {
 	from {
 		left: 100%;
